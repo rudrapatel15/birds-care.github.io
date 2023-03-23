@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse, redirect
 from .models import Product, Contact, Orders, OrderUpdate
 from math import ceil
 import json
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib import auth
+from django.contrib.auth  import authenticate,  login, logout
 #from django.views.decorators.csrf import csrf_exempt
 #from ..PayTm import Checksum
 # Create your views here.
@@ -112,5 +116,3 @@ def checkout(request):
         return render(request, 'shop/checkout.html', {'thank':thank, 'id': id})
     return render(request, 'shop/checkout.html')
 
-
-#
