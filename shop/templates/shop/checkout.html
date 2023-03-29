@@ -1,5 +1,5 @@
 {% extends 'shop/basic.html' %}
-{% block title%} Checkout - My Awesome Cart{% endblock %}
+{% block title%} Checkout - BIRD'S CARE Cart{% endblock %}
 {% block body %}
 <div class="container">
     <div class="col my-4">
@@ -14,15 +14,13 @@
   </ol>
 </nav>
 
-
-
-
         </div>
     </div>
     <div class="col my-4">
         <h2>Step 2 - Enter Address & Other Details:</h2>
         <form method="post" action="/shop/checkout/">{% csrf_token %}
             <input type="hidden" name="itemsJson" id="itemsJson">
+            <input type="hidden" name="amount" id="amount">
 
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -101,5 +99,6 @@ alert('Thanks for ordering with us. Your order is is {{id}}. Use it to track you
 localStorage.clear();
 document.location = "/shop";
 {% endif %}
+$('#amount').val($('#totalPrice').html())
 </script>
 {% endblock %}
