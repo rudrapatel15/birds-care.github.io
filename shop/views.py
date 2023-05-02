@@ -35,6 +35,7 @@ def contact(request):
         thank = True
     return render(request, 'shop/contact.html', {'thank': thank})
 
+
 def tracker(request):
     if request.method=="POST":
         orderId = request.POST.get('orderId', '')
@@ -54,6 +55,7 @@ def tracker(request):
             return HttpResponse('{"status":"error"}')
 
     return render(request, 'shop/tracker.html')
+
 
 def searchMatch(query, item):
     '''return true only if query matches the item'''
