@@ -9,8 +9,11 @@ margin-left:-4px;
 background-color: blue;
 }
 .col-md-3 img{
-max-width: 200px;
+width: 200px;
 height: 200px;
+}
+.cardrudra{
+min-height:350px;
 }
 body .carousel-indicator li{
 background-color: #7270fc;
@@ -51,10 +54,10 @@ padding-right: 0;
                 <div class="carousel-item active">
                     {% for i in product %}
                     <div class="col-xs-3 col-sm-3 col-md-3">
-                        <div class="card align-items-center" style="width: 18rem;">
+                        <div class="card align-items-center cardrudra" style="width: 18rem;">
                             <img src='/media/{{i.image}}' class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
+                                <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name|slice:"0:30"}}...</h5>
                                 <p class="card-text">{{i.desc|slice:"0:53"}}...</p>
                                  <h5 class="card-title" >Price:<span id="pricepr{{i.id}}"> {{i.price}}</span> </h5>
                                 <span id="divpr{{i.id}}" class="divpr">

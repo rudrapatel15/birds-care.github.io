@@ -1,5 +1,5 @@
 {% extends 'shop/basic.html' %}
-{% block title%} Bird's care Tracker{% endblock %}
+{% block title%} My Awesome Cart Tracker{% endblock %}
 {% block body %}
 <div class="container">
     <div class="col my-4">
@@ -8,11 +8,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputname">Order Id</label>
-                    <input type="text" class="form-control" id="orderId" name="orderId" placeholder="Order Id">
+                    <input type="text" class="form-control" id="orderId" name="orderId1" placeholder="Order Id">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                    <input type="email" class="form-control" id="email" name="email1" placeholder="Email">
                 </div>
                 <button type="submit" class="btn btn-primary">Track Order</button>
             </div>
@@ -21,12 +21,7 @@
         <h2>Your Order Status</h2>
         <div class="my-4">
             <ul class="list-group" id="items">
-                Enter your order Id and Email and click Track Order to find details about your order!
-            </ul>
-        </div>
-        <h2>Your Order Details</h2>
-        <div class="my-4">
-            <ul class="list-group" id="citems">
+            	Enter your order Id and Email and click Track Order to find details about your order!
             </ul>
         </div>
     </div>
@@ -48,11 +43,9 @@ $('#trackerForm').submit(function(event) {
             encode: true
         })
         .done(function(data) {
-            $('#citems').empty();
             console.log(data)
-            data = JSON.parse(data);
-            if (data['status'] == 'success') {
-                updates = data['updates'];
+            updates = JSON.parse(data);
+            if (updates.length > 0 & updates != {}) {
                 for (i = 0; i < updates.length; i++) {
                     let text = updates[i]['text'];
                     let time = updates[i]['time'];
@@ -62,23 +55,10 @@ $('#trackerForm').submit(function(event) {
                 </li>`
                     $('#items').append(mystr);
                 }
-                // Fill in the order details
-                cart = JSON.parse(data['itemsJson']);
-                console.log(cart);
-                for (item in cart) {
-                    let name = cart[item][1];
-                    let qty = cart[item][0];
-                    mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
-                    ${name}
-                    <span class="badge badge-primary badge-pill">${qty}</span>
-                </li>`
-                    $('#citems').append(mystr);
-                }
             } else {
-                mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+            	mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
                     Sorry, We are not able to fetch this order id and email. Make sure to type correct order Id and email</li>`
-                $('#items').append(mystr);
-                $('#citems').append(mystr);
+            	$('#items').append(mystr);
             }
         });
     event.preventDefault();
